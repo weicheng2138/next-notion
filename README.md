@@ -1,5 +1,36 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Dev Issues
+
+- [ ] Deal with the server console to browser console issue
+- [x] Notion API ans types
+- [x] Usability of the `react-notion-x`. There no one mantaining the project and it's not working properly.
+- [ ] i18n
+
+## Notion API
+
+### Setup
+
+1. Create a new integration in Notion from [here](https://www.notion.so/my-integrations)
+2. After creating the integration, you will get the `Integration Secret` which you will use to authenticate your requests.
+3. Click `show` to get the secret and copy it, which is something like `secret_...`.
+4. Create a new database in Notion and add some posts in it.
+5. Press the `...` button on the top right corner of the database and click on `Connect to` and click the integration name you created.
+6. Copy the `Database ID` from the URL of the database, which is something like `https://www.notion.so/...?v=123123123` and the `...` is the `Database ID`.
+7. Create a new `.env.local` file in the root of the project and add the following environment variables:
+   ```env
+   NOTION_API_SECRET=secret_...
+   NOTION_DATABASE_ID=...
+   ```
+8. Install the `@notionhq/client` official package by running:
+   ```bash
+   pnpm add @notionhq/client
+   ```
+
+### Usage
+
+2. type guards is working for all types of notion objects
+
 ## Getting Started
 
 First, run the development server:
