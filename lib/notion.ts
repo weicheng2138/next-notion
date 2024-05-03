@@ -10,17 +10,17 @@ export const fetchPages = React.cache(async () => {
   if (!process.env.NOTION_DATABASE_ID) {
     throw new Error("NOTION_DATABASE_ID is missing");
   }
-  return notion.databases
-    .query({
-      database_id: process.env.NOTION_DATABASE_ID,
-      // filter: {
-      //   property: "Status",
-      //   select: {
-      //     equals: "Published",
-      //   },
-      // },
-    })
-    .then((res) => res.results);
+  const res = await notion.databases.query({
+    database_id: process.env.NOTION_DATABASE_ID,
+    filter: {
+      property: "Status",
+      status: {
+        equals: "Published",
+      },
+    },
+  });
+  console.log("NOTION API CALLING");
+  return res.results;
 });
 
 export const fetchPageBlocks = React.cache(async (pageId: string) => {
