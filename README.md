@@ -29,7 +29,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Usage
 
-2. type guards is working for all types of notion objects
+2. **type guards** is working for all types of notion objects
+3. If the block is a database, the block id is the database id
 
 ## Getting Started
 
