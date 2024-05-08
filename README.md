@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [ ] Deal with the server console to browser console issue
 - [x] Notion API ans types
 - [x] Usability of the `react-notion-x`. There no one mantaining the project and it's not working properly.
-- [ ] i18n
+- [x] i18n with [Minimal i18n routing and translations]('https://github.com/vercel/next.js/tree/canary/examples/app-dir-i18n-routing')
 
 ## Notion API
 
@@ -31,6 +31,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 2. **type guards** is working for all types of notion objects
 3. If the block is a database, the block id is the database id
+4. `.env.local` NOTION_DATABASE_ID is the entry point of notion database. This is a page with two inline databases with two locales.
 
 ## Getting Started
 

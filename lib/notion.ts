@@ -13,7 +13,7 @@ import { type Locale } from "@/i18n-config";
 export const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 export const fetchPublishedBlogList = React.cache(
-  async (databaseId: string, locale: Locale) => {
+  async (databaseId: string) => {
     if (!process.env.NOTION_DATABASE_ID) {
       throw new Error("NOTION_DATABASE_ID is missing");
     }
@@ -31,30 +31,28 @@ export const fetchPublishedBlogList = React.cache(
   },
 );
 
-export const fetchPageBlocks = React.cache(
-  async (pageId: string, locale: Locale) => {
-    try {
-      const res = await notion.blocks.children.list({ block_id: pageId });
-      return res.results as BlockObjectResponse[];
-    } catch (error) {
-      if (isNotionClientError(error)) {
-        switch (error.code) {
-          case ClientErrorCode.RequestTimeout:
-            break;
-          case APIErrorCode.ObjectNotFound:
-            break;
-          case APIErrorCode.Unauthorized:
-            break;
-          case APIErrorCode.ValidationError:
-            break;
-          default:
-          // you could even take advantage of exhaustiveness checking
-        }
-        return Promise.reject(error.message);
+export const fetchPageBlocks = React.cache(async (pageId: string) => {
+  try {
+    const res = await notion.blocks.children.list({ block_id: pageId });
+    return res.results as BlockObjectResponse[];
+  } catch (error) {
+    if (isNotionClientError(error)) {
+      switch (error.code) {
+        case ClientErrorCode.RequestTimeout:
+          break;
+        case APIErrorCode.ObjectNotFound:
+          break;
+        case APIErrorCode.Unauthorized:
+          break;
+        case APIErrorCode.ValidationError:
+          break;
+        default:
+        // you could even take advantage of exhaustiveness checking
       }
-      return Promise.reject(error);
+      return Promise.reject(error.message);
     }
-  },
-);
+    return Promise.reject(error);
+  }
+});
 
 export const getDatabaseIdByLocale = (locale: string) => {};

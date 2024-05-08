@@ -1,9 +1,9 @@
 {
-  "name": "portfolio-weitsao-v3",
-  "version": "0.1.0",
+  "name": "next-notion",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "dev-temp": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",

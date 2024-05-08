@@ -6,7 +6,6 @@ export default async function Page({
 }: {
   params: { slug: string; lang: Locale };
 }) {
-  console.log("Slug locale:::", params.slug, params.lang);
   try {
     const blocks = await fetchPageBlocks(params.slug);
     if (!blocks) {
