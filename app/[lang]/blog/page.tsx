@@ -2,7 +2,7 @@ import Link from "next/link";
 import { isFullPage } from "@notionhq/client";
 import { fetchPageBlocks, fetchPublishedBlogList } from "@/lib/notion";
 import { notFound } from "next/navigation";
-import LocaleSwitcher from "../components/locale-switcher";
+import LocaleSwitcher from "@/components/locale-switcher";
 import { getDictionary } from "@/lib/locale";
 import type { Locale } from "@/i18n-config";
 
@@ -12,9 +12,7 @@ type Props = {
   };
 };
 export default async function Page({ params }: Props) {
-  console.log("params", params);
   const dictionary = await getDictionary(params.lang);
-  console.log("dictionary", dictionary);
   if (!process.env.NOTION_DATABASE_ID) {
     return <div>Notion database id is missing</div>;
   }
@@ -46,7 +44,6 @@ export default async function Page({ params }: Props) {
     <div className="flex-col gap-2">
       <h1>Blogs</h1>
 
-      <LocaleSwitcher />
       <h2>{dictionary["server-component"].author}</h2>
       <ul>
         {blogList.map((page) => {

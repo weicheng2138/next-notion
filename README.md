@@ -47,6 +47,8 @@ pnpm dev
 bun dev
 ```
 
+> `next dev --turbo` is not working properly. It's not updating the page when its not-found.
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.

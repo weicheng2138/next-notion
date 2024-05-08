@@ -31,7 +31,6 @@ export function middleware(request: NextRequest) {
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
-  console.log("pathname", pathname);
   if (pathnameHasLocale) return;
 
   const locale = getLocale(request);

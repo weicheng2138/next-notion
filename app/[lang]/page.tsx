@@ -1,5 +1,6 @@
 import { notion } from "@/lib/notion";
-import LocaleSwitcher from "./components/locale-switcher";
+import LocaleSwitcher from "@/components/locale-switcher";
+import Header from "@/components/header";
 export default async function Home({ params }: { params: { lang: string } }) {
   // if (!process.env.NOTION_TOKEN || !process.env.NOTION_DATABASE_ID) {
   //   return <div>Notion token or database id is missing</div>;
@@ -17,7 +18,6 @@ export default async function Home({ params }: { params: { lang: string } }) {
   return (
     <div>
       <h1>Home</h1>
-      <LocaleSwitcher />
     </div>
   );
 }

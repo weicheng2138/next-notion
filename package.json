@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "dev-temp": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
     "@notionhq/client": "^2.2.15",
+    "@radix-ui/react-select": "^2.0.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.378.0",
