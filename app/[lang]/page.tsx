@@ -1,23 +1,16 @@
-import { notion } from "@/lib/notion";
-import LocaleSwitcher from "@/components/locale-switcher";
-import Header from "@/components/header";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default async function Home({ params }: { params: { lang: string } }) {
-  // if (!process.env.NOTION_TOKEN || !process.env.NOTION_DATABASE_ID) {
-  //   return <div>Notion token or database id is missing</div>;
-  // }
-  // const res = await notion.blocks.children.list({
-  //   block_id: "c7690f8a87ef4496887052473be744c9",
-  // });
-  // const ids = res.results.map((block) => {
-  //   return block.id;
-  // });
-  // console.log(ids);
-  // pages.results.forEach(async (page) => {
-  //   console.log(await notion.blocks.children.list({ block_id: page.id }));
-  // });
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <main className="h-svh flex-col flex gap-4 justify-center items-center px-2 sm:px-3">
+      <h1 className="max-w-xl text-center font-bold sm:text-3xl text-xl">
+        Notion-Powered Next.js Boilerplate: Seamless Content Management with
+        Minimal Locale Settings
+      </h1>
+      <Button asChild>
+        <Link href="/blog">Go To Blog Page</Link>
+      </Button>
+    </main>
   );
 }

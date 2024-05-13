@@ -12,7 +12,7 @@ export default async function Page({
       return notFound();
     }
     return (
-      <div>
+      <main className="pt-16 h-svh">
         <h1>Blog Slug</h1>
         {blocks.map((block) => {
           if (block.type === "heading_2") {
@@ -48,7 +48,7 @@ export default async function Page({
             );
           }
         })}
-      </div>
+      </main>
     );
   } catch (error) {
     if (typeof error === "string") {

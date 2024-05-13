@@ -14,7 +14,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-export default function LocaleSwitcher() {
+
+type Props = {
+  // a prop that is a setState function from parent
+  triggerOpen?: (isOpen: boolean) => void;
+};
+export default function LocaleSwitcher({ triggerOpen }: Props) {
   console.log("rendering locale switcher");
   const pathName = usePathname();
 
@@ -35,8 +40,13 @@ export default function LocaleSwitcher() {
     setLocale(value);
     router.replace(redirectedPathName(value));
   };
+
   return (
-    <Select value={locale} onValueChange={handleLocaleChange}>
+    <Select
+      value={locale}
+      onValueChange={handleLocaleChange}
+      onOpenChange={(isOpen) => triggerOpen && triggerOpen(isOpen)}
+    >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Locales" />
       </SelectTrigger>

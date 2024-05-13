@@ -26,6 +26,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
    ```bash
    pnpm add @notionhq/client
    ```
+9. Notion Page template
+   ![Notion Page template](https://share.cleanshot.com/QmYdn9gF/download)
 
 ### Usage
 
