@@ -1,9 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import { isFullPage } from "@notionhq/client";
 import { fetchPageBlocks, fetchPublishedBlogList } from "@/lib/notion";
 import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/locale";
 import type { Locale } from "@/i18n-config";
+import {
+  Card,
+  CardContent,
+  CardCover,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 type Props = {
   params: {
@@ -40,125 +50,44 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <main className="flex-col gap-2 pt-16 h-svh">
+    <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
       <h1>Blogs</h1>
-
       <h2>{dictionary["server-component"].author}</h2>
-      <ul>
+
+      <section className="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4">
         {blogList.map((page) => {
           if (isFullPage(page) && page.properties["Name"].type === "title") {
             return (
               <Link key={page.id} href={`blog/${page.id}`}>
-                {page.properties["Name"].title[0].plain_text}
+                <Card>
+                  <CardCover>
+                    <Image
+                      className="rounded-t-lg"
+                      src={
+                        page.cover && page.cover.type === "external"
+                          ? page.cover.external.url
+                          : ""
+                      }
+                      alt="article cover"
+                      objectFit="cover"
+                      fill
+                    />
+                  </CardCover>
+                  <CardHeader>
+                    <CardTitle className="font-bold">
+                      {page.properties["Name"].title[0].plain_text}
+                    </CardTitle>
+                    <CardDescription>Card Description</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {page.properties["Name"].title[0].plain_text}
+                  </CardContent>
+                </Card>
               </Link>
             );
           }
         })}
-      </ul>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-        enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-        exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit
-        nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor
-        minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure
-        elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor
-        Lorem duis laboris cupidatat officia voluptate. Culpa proident
-        adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod.
-        Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-        Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa
-        et culpa duis.
-      </p>
+      </section>
     </main>
   );
 }

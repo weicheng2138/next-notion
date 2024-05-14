@@ -2,6 +2,7 @@
 import LocaleSwitcher from "@/components/locale-switcher";
 import useBodyScrollable from "@/hooks/useBodyScrollable";
 import { cn } from "@/lib/utils";
+import { Rss } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -17,9 +18,10 @@ export default function Header() {
         isScrollable && isOpen && "pr-[31px]",
       )}
     >
-      <nav className="flex w-full justify-between items-center max-w-5xl">
+      <nav className="flex gap-2 w-full justify-between items-center max-w-5xl">
         <Link href="/">
-          <h1 className="">Next Notion Boilerplate</h1>
+          <h1 className={cn("hidden md:block")}>Next Notion Boilerplate</h1>
+          <Rss className={cn("block md:hidden")} />
         </Link>
         <div className="flex gap-3 justify-center items-center">
           <Link

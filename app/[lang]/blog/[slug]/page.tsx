@@ -12,7 +12,7 @@ export default async function Page({
       return notFound();
     }
     return (
-      <main className="pt-16 h-svh">
+      <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
         <h1>Blog Slug</h1>
         {blocks.map((block) => {
           if (block.type === "heading_2") {

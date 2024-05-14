@@ -27,6 +27,7 @@ export const fetchPublishedBlogList = React.cache(
       },
     });
     console.log("NOTION API CALLING");
+    console.log(res.results);
     return res.results;
   },
 );
