@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
+  console.log("rendering header");
   const [isOpen, setIsOpen] = useState(false);
   const handleLocaleIsOpen = (value: boolean) => setIsOpen(value);
 

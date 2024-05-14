@@ -1,9 +1,8 @@
+"use client";
 import { useEffect, useState } from "react";
 
 function useBodyScrollable() {
-  const [bodyScrollable, setBodyScrollable] = useState(
-    document.body.scrollHeight > window.innerHeight,
-  );
+  const [bodyScrollable, setBodyScrollable] = useState(false);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
