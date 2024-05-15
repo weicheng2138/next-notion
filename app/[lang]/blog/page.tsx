@@ -10,7 +10,6 @@ import {
   CardContent,
   CardCover,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -51,8 +50,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
-      <h1>Blogs</h1>
-      <h2>{dictionary["server-component"].author}</h2>
+      <h1 className="text-2xl mt-4">{dictionary["server-component"].title}</h1>
+      <span>sdsdsdsddsds</span>
 
       <section className="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4">
         {blogList.map((page) => {

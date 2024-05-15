@@ -1,5 +1,9 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { type Locale } from "@/i18n-config";
 import { fetchPageBlocks } from "@/lib/notion";
+import { AlertCircle, ChevronLeft } from "lucide-react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 export default async function Page({
   params,
@@ -22,6 +26,7 @@ export default async function Page({
     });
 
     const blocks = await fetchPageBlocks(params.slug);
+    console.warn(blocks);
     if (!blocks) {
       return notFound();
     }
@@ -66,7 +71,23 @@ export default async function Page({
     );
   } catch (error) {
     if (typeof error === "string") {
-      return <span>{error}</span>;
+      return (
+        <div className="flex flex-col gap-4 items-center">
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              <span>{error}</span>
+            </AlertDescription>
+          </Alert>
+          <Link href={`/blog`}>
+            <Button variant={"ghost"}>
+              <ChevronLeft />
+              Go Back
+            </Button>
+          </Link>
+        </div>
+      );
     }
     throw error;
   }
