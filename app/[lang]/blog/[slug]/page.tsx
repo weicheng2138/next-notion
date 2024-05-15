@@ -6,7 +6,21 @@ export default async function Page({
 }: {
   params: { slug: string; lang: Locale };
 }) {
+  if (!process.env.NOTION_DATABASE_ID) {
+    return <div>Notion database id is missing</div>;
+  }
   try {
+    const localeBlocks = await fetchPageBlocks(process.env.NOTION_DATABASE_ID);
+    if (!localeBlocks) {
+      return notFound();
+    }
+
+    const targetLocaleBlock = localeBlocks.find((block) => {
+      if (block.type === "child_database") {
+        return block.child_database.title === params.lang;
+      }
+    });
+
     const blocks = await fetchPageBlocks(params.slug);
     if (!blocks) {
       return notFound();

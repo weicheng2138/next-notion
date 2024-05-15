@@ -57,8 +57,15 @@ export default async function Page({ params }: Props) {
       <section className="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4">
         {blogList.map((page) => {
           if (isFullPage(page) && page.properties["Name"].type === "title") {
+            console.log(
+              page.properties["ID"].type === "rich_text" &&
+                page.properties["ID"].rich_text[0].plain_text,
+            );
             return (
-              <Link key={page.id} href={`blog/${page.id}`}>
+              <Link
+                key={page.id}
+                href={`blog/${page.properties["ID"].type === "rich_text" && page.properties["ID"].rich_text[0].plain_text}`}
+              >
                 <Card>
                   <CardCover>
                     <Image
