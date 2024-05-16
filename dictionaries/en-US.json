@@ -1,5 +1,11 @@
 {
   "server-component": {
+    "page": {
+      "blogs": {
+        "title": "Notions Blogs",
+        "description": "A Notion based blog list"
+      }
+    },
     "title": "Notion Blogs",
     "author": "Jared Hanson"
   }

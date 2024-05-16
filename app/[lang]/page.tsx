@@ -9,7 +9,7 @@ export default async function Home({ params }: { params: { lang: string } }) {
         Minimal Locale Settings
       </h1>
       <Button asChild>
-        <Link href="/blog">Go To Blog Page</Link>
+        <Link href={`${params.lang}/blog`}>Go To Blog Page</Link>
       </Button>
     </main>
   );

@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 type Props = {
   params: {
@@ -49,26 +50,27 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
-      <h1 className="text-2xl mt-4">{dictionary["server-component"].title}</h1>
-      <span>sdsdsdsddsds</span>
+    <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4 mb-40">
+      <h1 className="text-2xl mt-4">
+        {dictionary["server-component"].page.blogs.title}
+      </h1>
+      <span className="text-muted-foreground text-sm mt-2">
+        {dictionary["server-component"].page.blogs.description}
+      </span>
+      <Separator className="my-4" />
 
-      <section className="flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-4">
+      <section className="flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-4">
         {blogList.map((page) => {
           if (isFullPage(page) && page.properties["Name"].type === "title") {
-            console.log(
-              page.properties["ID"].type === "rich_text" &&
-                page.properties["ID"].rich_text[0].plain_text,
-            );
             return (
               <Link
                 key={page.id}
-                href={`blog/${page.properties["ID"].type === "rich_text" && page.properties["ID"].rich_text[0].plain_text}`}
+                href={`/${params.lang}/blog/${page.properties["ID"].type === "rich_text" && page.properties["ID"].rich_text[0].plain_text}`}
               >
                 <Card>
                   <CardCover>
                     <Image
-                      className="rounded-t-lg"
+                      className="rounded-t-lg z-0"
                       src={
                         page.cover && page.cover.type === "external"
                           ? page.cover.external.url

@@ -25,7 +25,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="p-2">
+    <div className="p-2 w-full max-w-xl">
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>Error</AlertTitle>

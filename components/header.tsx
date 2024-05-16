@@ -1,12 +1,16 @@
 "use client";
 import LocaleSwitcher from "@/components/locale-switcher";
 import useBodyScrollable from "@/hooks/useBodyScrollable";
+import { Locale } from "@/i18n-config";
 import { cn } from "@/lib/utils";
 import { Rss } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Header() {
+type Props = {
+  lang: Locale;
+};
+export default function Header({ lang }: Props) {
   console.log("rendering header");
   const [isOpen, setIsOpen] = useState(false);
   const handleLocaleIsOpen = (value: boolean) => setIsOpen(value);
@@ -15,19 +19,23 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "flex justify-center items-center h-16 px-4 w-full top-0 fixed border-b-gray-200 border-b bg-background",
+        "flex justify-center items-center h-16 px-4 w-full top-0 right-0 left-0 fixed border-b-gray-200 border-b bg-background z-50",
         isScrollable && isOpen && "pr-[31px]",
       )}
     >
-      <nav className="flex gap-2 w-full justify-between items-center max-w-5xl">
-        <Link href="/">
+      <nav
+        className={cn(
+          "flex gap-2 w-full justify-between items-center max-w-5xl",
+        )}
+      >
+        <Link href={`/${lang}/`}>
           <h1 className={cn("hidden md:block")}>Next Notion Boilerplate</h1>
           <Rss className={cn("block md:hidden")} />
         </Link>
         <div className="flex gap-3 justify-center items-center">
           <Link
             className="text-gray-500 hover:text-black font-light"
-            href={"/blog"}
+            href={`/${lang}/blog`}
           >
             Blog
           </Link>

@@ -35,7 +35,7 @@ export default function RootLayout({ children, params }: Readonly<Props>) {
           fontSans.variable,
         )}
       >
-        <Header />
+        <Header lang={params.lang} />
         {children}
       </body>
     </html>

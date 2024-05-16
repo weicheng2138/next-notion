@@ -1,5 +1,11 @@
 {
   "server-component": {
+    "page": {
+      "blogs": {
+        "title": "Notion 部落格",
+        "description": "這是一個使用 Notion API 打造的部落格，透過 Notion 的資料庫來管理文章，並透過 Notion API 來取得資料。"
+      }
+    },
     "title": "Notion 部落格",
     "author": "嘉雷漢森"
   }

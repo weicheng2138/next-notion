@@ -1,7 +1,8 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { type Locale } from "@/i18n-config";
-import { fetchPageBlocks } from "@/lib/notion";
+import { fetchPageBlocks, fetchPublishedBlogList } from "@/lib/notion";
+import { isFullPage } from "@notionhq/client";
 import { AlertCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -25,8 +26,27 @@ export default async function Page({
       }
     });
 
-    const blocks = await fetchPageBlocks(params.slug);
-    console.warn(blocks);
+    if (!targetLocaleBlock) {
+      return notFound();
+    }
+
+    const blogList = await fetchPublishedBlogList(targetLocaleBlock.id);
+    const targetDatabase = blogList.find((blog) => {
+      if (
+        isFullPage(blog) &&
+        blog.properties["Name"].type === "title" &&
+        blog.properties["ID"].type === "rich_text"
+      ) {
+        return blog.properties["ID"].rich_text[0].plain_text === params.slug;
+      }
+      return false;
+    });
+    if (!targetDatabase) {
+      throw "Blog not found";
+      // return notFound();
+    }
+    const blocks = await fetchPageBlocks(targetDatabase.id);
+    // console.warn(blocks);
     if (!blocks) {
       return notFound();
     }
@@ -72,7 +92,7 @@ export default async function Page({
   } catch (error) {
     if (typeof error === "string") {
       return (
-        <div className="flex flex-col gap-4 items-center">
+        <div className="flex flex-col gap-4 items-center p-2 w-full max-w-xl">
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
