@@ -3,10 +3,21 @@
     "page": {
       "blogs": {
         "title": "Notions Blogs",
-        "description": "A Notion based blog list"
+        "description": "A Notion based blog list."
+      },
+      "home": {
+        "slogan": "Notion-Powered Next.js Boilerplate: Seamless Content Management with Minimal Locale Settings",
+        "button": "Go to Blogs"
       }
     },
     "title": "Notion Blogs",
     "author": "Jared Hanson"
+  },
+  "client-component": {
+    "header": {
+      "nav": {
+        "blogs": "Blogs"
+      }
+    }
   }
 }

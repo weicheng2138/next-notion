@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 /**
  * Combines multiple class names into a single string.
+ * And also conditions
  *
  * @param inputs - The class names to be combined.
  * @returns The combined class names as a string.

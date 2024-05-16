@@ -4,9 +4,20 @@
       "blogs": {
         "title": "Notion 部落格",
         "description": "這是一個使用 Notion API 打造的部落格，透過 Notion 的資料庫來管理文章，並透過 Notion API 來取得資料。"
+      },
+      "home": {
+        "slogan": "Notion-Powered Next.js Boilerplate: 官方基本的語系設定，無縫的內容管理",
+        "button": "前往部落格"
       }
     },
     "title": "Notion 部落格",
     "author": "嘉雷漢森"
+  },
+  "client-component": {
+    "header": {
+      "nav": {
+        "blogs": "部落格"
+      }
+    }
   }
 }

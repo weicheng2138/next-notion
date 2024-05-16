@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 type Props = {
   params: {
@@ -50,7 +51,7 @@ export default async function Page({ params }: Props) {
   }
 
   return (
-    <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4 mb-40">
+    <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
       <h1 className="text-2xl mt-4">
         {dictionary["server-component"].page.blogs.title}
       </h1>
@@ -59,7 +60,7 @@ export default async function Page({ params }: Props) {
       </span>
       <Separator className="my-4" />
 
-      <section className="flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-4">
+      <section className="flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-4 pb-20">
         {blogList.map((page) => {
           if (isFullPage(page) && page.properties["Name"].type === "title") {
             return (
@@ -87,11 +88,18 @@ export default async function Page({ params }: Props) {
                     <CardTitle className="font-bold">
                       {page.properties["Name"].title[0].plain_text}
                     </CardTitle>
-                    <CardDescription>Card Description</CardDescription>
+                    {page.properties["Tags"].type === "multi_select" && (
+                      <CardContent className="flex gap-2">
+                        {page.properties["Tags"].multi_select.map((tag) => {
+                          return (
+                            <Badge variant="outline" key={tag.id}>
+                              {tag.name}
+                            </Badge>
+                          );
+                        })}
+                      </CardContent>
+                    )}
                   </CardHeader>
-                  <CardContent>
-                    {page.properties["Name"].title[0].plain_text}
-                  </CardContent>
                 </Card>
               </Link>
             );

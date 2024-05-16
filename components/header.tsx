@@ -2,6 +2,7 @@
 import LocaleSwitcher from "@/components/locale-switcher";
 import useBodyScrollable from "@/hooks/useBodyScrollable";
 import { Locale } from "@/i18n-config";
+import { getDictionary } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 import { Rss } from "lucide-react";
 import Link from "next/link";
@@ -9,9 +10,11 @@ import { useState } from "react";
 
 type Props = {
   lang: Locale;
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["client-component"];
 };
-export default function Header({ lang }: Props) {
+export default function Header({ lang, dictionary }: Props) {
   console.log("rendering header");
+  console.log(dictionary);
   const [isOpen, setIsOpen] = useState(false);
   const handleLocaleIsOpen = (value: boolean) => setIsOpen(value);
 
@@ -37,7 +40,7 @@ export default function Header({ lang }: Props) {
             className="text-gray-500 hover:text-black font-light"
             href={`/${lang}/blog`}
           >
-            Blog
+            {dictionary.header.nav.blogs}
           </Link>
           <LocaleSwitcher triggerOpen={handleLocaleIsOpen} />
         </div>
