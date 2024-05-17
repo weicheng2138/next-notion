@@ -1,8 +1,10 @@
+import Block from "@/components/block";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { type Locale } from "@/i18n-config";
 import { fetchPageBlocks, fetchPublishedBlogList } from "@/lib/notion";
-import { isFullPage } from "@notionhq/client";
+import { isFullPage, isFullBlock } from "@notionhq/client";
+import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { AlertCircle, ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -50,43 +52,38 @@ export default async function Page({
     if (!blocks) {
       return notFound();
     }
+
+    // Group blocks by type of bulleted_list_item and numbered_list_item
+    const groupedBlocks = blocks.reduce(
+      (acc, block) => {
+        if (
+          block.type === "bulleted_list_item" ||
+          block.type === "numbered_list_item"
+        ) {
+          if (!acc.length || acc[acc.length - 1].type !== block.type) {
+            acc.push({ type: block.type, blocks: [block] });
+          } else {
+            acc[acc.length - 1].blocks.push(block);
+          }
+        } else {
+          acc.push({ type: block.type, blocks: [block] });
+        }
+        return acc;
+      },
+      [] as { type: string; blocks: BlockObjectResponse[] }[],
+    );
+
     return (
-      <main className="flex-col gap-2 pt-16 h-svh w-full max-w-5xl px-2 md:px-4">
+      <main className="flex flex-col gap-5 sm:gap-7 pt-16 pb-20 w-full h-full max-w-5xl px-4 sm:px-6">
         <h1>Blog Slug</h1>
-        {blocks.map((block) => {
-          if (block.type === "heading_2") {
-            return (
-              <h2 key={block.id}>{block.heading_2.rich_text[0].plain_text}</h2>
-            );
-          }
-          if (block.type === "paragraph") {
-            return (
-              <div key={block.id}>
-                <h2>{block.id}</h2>
-                {block.paragraph.rich_text.map((text, index) => {
-                  if (text.type === "text" && text.href) {
-                    return (
-                      <a
-                        key={`${text.plain_text}_${index}`}
-                        href={text.href}
-                        className="text-blue-400"
-                      >
-                        {text.plain_text}
-                      </a>
-                    );
-                  }
-                  if (text.type === "text") {
-                    return (
-                      <p key={`${text.plain_text}_${index}`}>
-                        {text.plain_text}
-                      </p>
-                    );
-                  }
-                })}
-              </div>
-            );
-          }
-        })}
+        {groupedBlocks.map((group, index) =>
+          group.type === "bulleted_list_item" ||
+          group.type === "numbered_list_item" ? (
+            <List key={index} blocks={group.blocks} />
+          ) : (
+            group.blocks.map((block) => <Block key={block.id} block={block} />)
+          ),
+        )}
       </main>
     );
   } catch (error) {
@@ -111,4 +108,31 @@ export default async function Page({
     }
     throw error;
   }
+}
+
+type ListProps = {
+  blocks: BlockObjectResponse[];
+};
+function List({ blocks }: ListProps) {
+  if (!blocks.length) return null;
+
+  const listType = blocks[0].type === "bulleted_list_item" ? "ul" : "ol";
+
+  return (
+    <>
+      {listType === "ul" ? (
+        <ul className="list-disc list-inside">
+          {blocks.map((block) => (
+            <Block key={block.id} block={block} />
+          ))}
+        </ul>
+      ) : (
+        <ol className="list-decimal list-inside">
+          {blocks.map((block) => (
+            <Block key={block.id} block={block} />
+          ))}
+        </ol>
+      )}
+    </>
+  );
 }

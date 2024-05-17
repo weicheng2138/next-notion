@@ -14,7 +14,6 @@ type Props = {
 };
 export default function Header({ lang, dictionary }: Props) {
   console.log("rendering header");
-  console.log(dictionary);
   const [isOpen, setIsOpen] = useState(false);
   const handleLocaleIsOpen = (value: boolean) => setIsOpen(value);
 

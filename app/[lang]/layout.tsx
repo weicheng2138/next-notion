@@ -35,7 +35,7 @@ export default async function RootLayout({
     <html lang={params.lang}>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased relative flex flex-col items-center justify-center",
+          "min-h-screen bg-background font-sans antialiased relative flex flex-col items-center",
           fontSans.variable,
         )}
       >

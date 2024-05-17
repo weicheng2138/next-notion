@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <>
+    <div className="h-svh flex flex-col items-center justify-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -23,6 +23,6 @@ export default function Loading() {
         <path d="m4.9 4.9 2.9 2.9" />
       </svg>
       <p>Loading...</p>
-    </>
+    </div>
   );
 }
