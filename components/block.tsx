@@ -1,6 +1,7 @@
 import {
   BlockObjectResponse,
   ImageBlockObjectResponse,
+  RichTextItemResponse,
 } from "@notionhq/client/build/src/api-endpoints";
 import RichText from "@/components/rich-text";
 import Image from "next/image";
@@ -14,7 +15,6 @@ export default function Block({ block }: Props) {
   // console.log("block:", block);
   switch (block.type) {
     case "paragraph":
-      console.log("block.paragraph.rich_text:", block.paragraph);
       return (
         <>
           {block.paragraph.rich_text.length !== 0 ? (
@@ -107,10 +107,57 @@ export default function Block({ block }: Props) {
         </div>
       );
     case "image":
-      console.log("block.image:", block.image);
       return <BasicImage block={block} />;
     case "divider":
       return <hr className="border-t border-gray-500/20 my-2" />;
+    // case "link_preview":
+    //   console.log("block.linkpreview:", block.link_preview);
+    //   return (
+    //     <div
+    //       style={{
+    //         position: "relative",
+    //       }}
+    //     >
+    //       <iframe
+    //         width="auto"
+    //         height="450"
+    //         src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2Frzg5W1yvaaoIlZZiauW0IQ%2F02%25EF%25BD%259C%25E4%25BD%259C%25E5%2593%2581%25EF%25BD%259C%25E4%25BD%259C%25E5%2593%2581%25E9%259B%2586%3Fnode-id%3D795-6556%26starting-point-node-id%3D795%253A6357%26t%3D5mlx3zGZV8BRQGBF-1"
+    //         allowFullScreen
+    //       ></iframe>
+    //       {/* <iframe src={block.link_preview.url} className="" /> */}
+    //     </div>
+    //   );
+    // case "embed":
+    //   console.log("block.embed:", block.embed);
+    //   return (
+    //     <div
+    //       style={{
+    //         position: "relative",
+    //       }}
+    //     >
+    //       <iframe src={block.embed.url} className="" />
+    //     </div>
+    //   );
+    case "video":
+      return (
+        <div>
+          <div className="relative">
+            <iframe
+              className="w-full aspect-video"
+              src={
+                block.video.type === "external"
+                  ? block.video.external.url
+                  : block.video.file.url
+              }
+              // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              // referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+
+          <Caption caption={block.video.caption} />
+        </div>
+      );
     default:
       return (
         <Alert variant="destructive">
@@ -148,9 +195,17 @@ function BasicImage({ block }: { block: ImageBlockObjectResponse }) {
         />
       </div>
 
-      {block.image.caption.length > 0 && (
-        <figcaption className="py-2 whitespace-pre-wrap break-words text-gray-600/60">
-          {block.image.caption.map((textBlock, index) => (
+      <Caption caption={block.image.caption} />
+    </div>
+  );
+}
+
+function Caption({ caption }: { caption: RichTextItemResponse[] }) {
+  return (
+    <>
+      {caption.length > 0 && (
+        <figcaption className="text-xs py-2 whitespace-pre-wrap break-words text-gray-600/60">
+          {caption.map((textBlock, index) => (
             <RichText
               textBlock={textBlock}
               key={`${textBlock.plain_text}_${index}`}
@@ -158,6 +213,6 @@ function BasicImage({ block }: { block: ImageBlockObjectResponse }) {
           ))}
         </figcaption>
       )}
-    </div>
+    </>
   );
 }
