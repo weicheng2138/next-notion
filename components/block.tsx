@@ -107,6 +107,7 @@ export default function Block({ block }: Props) {
         </div>
       );
     case "image":
+      // console.log("block.image:", block.image);
       return <BasicImage block={block} />;
     case "divider":
       return <hr className="border-t border-gray-500/20 my-2" />;

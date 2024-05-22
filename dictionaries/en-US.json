@@ -3,7 +3,12 @@
     "page": {
       "blogs": {
         "title": "Notions Blogs",
-        "description": "A Notion based blog list."
+        "description": "A Notion based blog list.",
+        "empty": "No blogs found.",
+        "empty-detail": "Notion database with certain locale is not found. Please check the locale database in the Notion database.",
+        "slug": {
+          "last-updated": "Last updated:"
+        }
       },
       "home": {
         "slogan": "Notion-Powered Next.js Boilerplate: Seamless Content Management with Minimal Locale Settings",
