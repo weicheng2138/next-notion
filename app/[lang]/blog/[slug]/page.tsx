@@ -18,7 +18,7 @@ type Props = {
   params: { slug: string; lang: Locale };
 };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const formattedSlug = params.slug.split("-").slice(0, -1).join("-");
+  const formattedSlug = params.slug.split("-").slice(0, -1).join(" ");
   // Title that is without the last ID
   const title =
     params.lang === "zh-TW" ? decodeURI(formattedSlug) : formattedSlug;
