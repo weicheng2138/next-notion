@@ -47,7 +47,7 @@ export default function LocaleSwitcher({ triggerOpen }: Props) {
       onValueChange={handleLocaleChange}
       onOpenChange={(isOpen) => triggerOpen && triggerOpen(isOpen)}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px]" aria-label="locale switch">
         <SelectValue placeholder="Locales" />
       </SelectTrigger>
       <SelectContent>

@@ -30,7 +30,7 @@ export default function Header({ lang, dictionary }: Props) {
           "flex gap-2 w-full justify-between items-center max-w-5xl",
         )}
       >
-        <Link href={`/${lang}/`}>
+        <Link href={`/${lang}/`} aria-label="home page">
           <h1 className={cn("hidden md:block")}>Next Notion Boilerplate</h1>
           <Rss className={cn("block md:hidden")} />
         </Link>
