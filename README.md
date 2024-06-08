@@ -26,12 +26,17 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
    ```bash
    pnpm add @notionhq/client
    ```
+9. Notion Page template
+   ![Notion Page template](https://share.cleanshot.com/QmYdn9gF/download)
 
 ### Usage
 
 2. **type guards** is working for all types of notion objects
 3. If the block is a database, the block id is the database id
 4. `.env.local` NOTION_DATABASE_ID is the entry point of notion database. This is a page with two inline databases with two locales.
+5. When upload files, the url will expire in one hour. You can see the [link](https://developers.notion.com/docs/working-with-files-and-media#retrieving-files-and-media-via-the-notion-api) for further information.
+
+````tsx
 
 ## Getting Started
 
@@ -45,7 +50,7 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+````
 
 > `next dev --turbo` is not working properly. It's not updating the page when its not-found.
 

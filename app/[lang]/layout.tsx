@@ -26,16 +26,23 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({ children, params }: Readonly<Props>) {
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<Props>) {
+  const dictionary = await getDictionary(params.lang);
   return (
     <html lang={params.lang}>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased relative flex flex-col items-center",
           fontSans.variable,
         )}
       >
-        <Header />
+        <Header
+          lang={params.lang}
+          dictionary={dictionary["client-component"]}
+        />
         {children}
       </body>
     </html>

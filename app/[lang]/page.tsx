@@ -1,23 +1,20 @@
-import { notion } from "@/lib/notion";
-import LocaleSwitcher from "@/components/locale-switcher";
-import Header from "@/components/header";
-export default async function Home({ params }: { params: { lang: string } }) {
-  // if (!process.env.NOTION_TOKEN || !process.env.NOTION_DATABASE_ID) {
-  //   return <div>Notion token or database id is missing</div>;
-  // }
-  // const res = await notion.blocks.children.list({
-  //   block_id: "c7690f8a87ef4496887052473be744c9",
-  // });
-  // const ids = res.results.map((block) => {
-  //   return block.id;
-  // });
-  // console.log(ids);
-  // pages.results.forEach(async (page) => {
-  //   console.log(await notion.blocks.children.list({ block_id: page.id }));
-  // });
+import { Button } from "@/components/ui/button";
+import { Locale } from "@/i18n-config";
+import { getDictionary } from "@/lib/locale";
+import Link from "next/link";
+
+export default async function Home({ params }: { params: { lang: Locale } }) {
+  const dictionary = await getDictionary(params.lang);
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <main className="h-svh flex-col flex gap-4 justify-center items-center px-2 sm:px-3 max-w-5xl w-full">
+      <h1 className="max-w-xl text-center font-bold sm:text-3xl text-xl">
+        {dictionary["server-component"].page.home.slogan}
+      </h1>
+      <Button asChild>
+        <Link href={`${params.lang}/blog`}>
+          {dictionary["server-component"].page.home.button}
+        </Link>
+      </Button>
+    </main>
   );
 }
