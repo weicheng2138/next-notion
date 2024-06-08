@@ -13,7 +13,6 @@ type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["client-component"];
 };
 export default function Header({ lang, dictionary }: Props) {
-  console.log("rendering header");
   const [isOpen, setIsOpen] = useState(false);
   const handleLocaleIsOpen = (value: boolean) => setIsOpen(value);
 
