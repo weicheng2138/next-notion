@@ -27,7 +27,7 @@ export const fetchPublishedBlogList = React.cache(
         },
       },
     });
-    console.log("NOTION API CALLING");
+    // console.log("NOTION API CALLING");
     // console.log(res.results);
     return res.results;
   },
@@ -38,6 +38,7 @@ export const fetchPageBlocks = React.cache(async (pageId: string) => {
     const res = await notion.blocks.children.list({ block_id: pageId });
     return res.results as BlockObjectResponse[];
   } catch (error) {
+    console.error(error);
     if (isNotionClientError(error)) {
       switch (error.code) {
         case ClientErrorCode.RequestTimeout:
@@ -59,7 +60,7 @@ export const fetchPageBlocks = React.cache(async (pageId: string) => {
 
 export const fetchBlocksFromSlug = React.cache(
   async (locale: Locale, id: string | undefined) => {
-    console.log("fetchBlocksFromSlug", locale, id);
+    // console.log("fetchBlocksFromSlug", locale, id);
     try {
       if (!process.env.NOTION_DATABASE_ID) {
         throw new Error("NOTION_DATABASE_ID is missing");
@@ -107,9 +108,8 @@ export const fetchBlocksFromSlug = React.cache(
         page: targetBlog,
         blocks,
       };
-
-      // return res.results as BlockObjectResponse[];
     } catch (error) {
+      console.error(error);
       if (isNotionClientError(error)) {
         switch (error.code) {
           case ClientErrorCode.RequestTimeout:

@@ -41,13 +41,9 @@ export default async function Page({ params }: Props) {
     return notFound();
   }
   const blogList = await fetchPublishedBlogList(targetLocaleBlock.id);
-  // console.log(blocks);
 
   if (!blogList) {
     return notFound();
-  }
-
-  if (blogList.length === 0) {
   }
 
   return (

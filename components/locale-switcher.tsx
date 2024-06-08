@@ -20,7 +20,6 @@ type Props = {
   triggerOpen?: (isOpen: boolean) => void;
 };
 export default function LocaleSwitcher({ triggerOpen }: Props) {
-  console.log("rendering locale switcher");
   const pathName = usePathname();
 
   // check pathName.split("/")[1] is a valid locale from i18n.locales
