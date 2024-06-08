@@ -125,3 +125,8 @@ export default async function Page({ params }: Props) {
     </main>
   );
 }
+
+/**
+ * @description revalidate is the number of seconds after which a page re-generation can occur
+ */
+export const revalidate = 0;
